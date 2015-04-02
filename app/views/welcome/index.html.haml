@@ -1,0 +1,54 @@
+.panel.panel-default.panel-welcome
+  .panel-body
+    .panel-welcome-section.panel-sing-up
+      .title
+        = t 'sing_up_title'
+      .form
+        = form_for(user_resource,
+                    url: registration_path(user_resource_name),
+                    html: { id: 'sign_up_user' },
+                    format: :json,
+                    remote: true) do |f|
+          .form-group
+            = f.label :email
+            = f.text_field :email, class: 'form-control', placeholder: :email
+          .form-group
+            = f.label :password
+            = f.password_field :password,
+                                class: 'form-control',
+                                placeholder: :password,
+                                length_min: password_length.first,
+                                length_max: password_length.last
+          .form-group
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation,
+                                class: 'form-control',
+                                placeholder: :password_confirmation,
+                                length_min: password_length.first,
+                                length_max: password_length.last
+          = f.submit t('sing_up_button'), class: 'btn btn-primary'
+
+    .panel-welcome-section.panel-sing-in
+      .title
+        = t 'sing_in_title'
+      .form
+        = form_for(user_resource,
+                    url: session_path(user_resource_name),
+                    html: { id: 'sign_in_user' },
+                    format: :json,
+                    remote: true ) do |f|
+          .form-group
+            = f.label :email
+            = f.text_field :email, class: 'form-control', placeholder: :email
+          .form-group
+            = f.label :password
+            = f.password_field :password,
+                                class: 'form-control',
+                                placeholder: :password,
+                                length_min: password_length.first,
+                                length_max: password_length.last
+          = f.submit t('sing_in_button'), class: 'btn btn-primary'
+      .or
+        = t 'sing_in_or'
+      .social
+        %button.btn.btn-facebook

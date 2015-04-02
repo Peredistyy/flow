@@ -11,6 +11,5 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require turbolinks
+//= require bootstrapValidator.min
 //= require_tree .

@@ -1,0 +1,44 @@
+.container
+  .col-md-8.col-md-offset-2
+    .main-title
+      = t 'main_title'
+      .from
+        = t 'main_title_from', name: 'RUBY GARAGE'
+
+
+.container
+  .col-md-8.col-md-offset-2
+    .panel-project
+      .panel-heading
+        = image_tag 'project-icon.png', class: 'panel-heading-icon'
+        Panel heading without title
+        %span.pull-right
+          %button.project-edit
+          %span.project-icon-separator
+            |
+          %button.project-delete
+      .panel-add-task
+        = image_tag 'project-task-add-icon.png', class: 'project-task-add'
+        .input-group.project-task-add-input-group
+          %input.form-control{ type: 'text', placeholder: t('add_task_input_placeholder') }
+          %span.input-group-btn
+            %button.btn.btn-success{ type: 'button' }= t 'add_task_button'
+      .panel-body
+        %table.table.table-bordered.table-hover.table-tasks
+          %tbody
+            %tr
+              %td
+                TEST
+              %td.actions
+                %button.project-task-open
+                %span.project-task-icon-separator
+                  |
+                %button.project-task-edit
+                %span.project-task-icon-separator
+                  |
+                %button.project-task-delete
+
+.container
+  .col-md-8.col-md-offset-2
+    .panel-add-project
+      %button.btn.btn-primary.btn-add-project{ type: 'button' }= t 'add_project_button'

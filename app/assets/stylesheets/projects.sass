@@ -1,0 +1,114 @@
+.main-title
+  text-align: center
+  margin-top: 60px
+  margin-bottom: 60px
+  font-size: 21px
+  font-weight: bold
+  text-transform: uppercase
+
+  .from
+    font-size: 13px
+    font-weight: normal
+
+.panel-project
+  width: 700px
+  margin-bottom: 35px
+
+  .panel-heading
+    background: url('./panel-project-head-background.png') repeat-x
+    border: 1px solid black
+    border-top-right-radius: 0px
+    border-top-left-radius: 0px
+    color: #FFF
+    height: 44px
+
+    .panel-heading-icon
+      margin-right: 10px
+
+  .project-icon
+    width: 16px
+    height: 16px
+    border: 0px
+    margin: 0px
+
+  .project-icon-separator
+    color: #9BB7E0
+    margin-left: 3px
+    margin-right: 3px
+    font-size: 16px
+
+  .project-edit
+    @extend .project-icon
+    background: url('./project-edit-icon.png') no-repeat
+
+  .project-delete
+    @extend .project-icon
+    background: url('./project-delete-icon.png') no-repeat
+
+  .panel-add-task
+    background: #DADADA
+    border-left: 1px solid #ADAA8A
+    border-right: 1px solid #ADAA8A
+    padding: 5px 10px
+    height: 44px
+
+    .project-task-add
+      margin-left: 5px
+      margin-top: 6px
+
+    .project-task-add-input-group
+      float: right
+      width: 640px
+
+      .btn
+        width: 150px
+
+  .panel-body
+    background: #FFF
+    border: 1px solid #ADAA8A
+    border-bottom-right-radius: 6px
+    border-bottom-left-radius: 6px
+    padding: 0px
+
+    .table
+      margin-bottom: 5px
+
+    .table-tasks
+      .actions
+        width: 159px
+        text-align: center
+
+        .project-task-icon
+          width: 13px
+          height: 13px
+          border: 0px
+          margin: 0px
+
+        .project-task-open
+          @extend .project-task-icon
+          background: url('./project-task-open-icon.png') no-repeat
+
+        .project-task-edit
+          @extend .project-task-icon
+          background: url('./project-task-edit-icon.png') no-repeat
+
+        .project-task-delete
+          @extend .project-task-icon
+          background: url('./project-task-delete-icon.png') no-repeat
+
+        .project-task-icon-separator
+          color: #CCC
+          margin-left: 3px
+          margin-right: 3px
+          font-size: 13px
+
+    .table-hover > tbody > tr:hover > td, > th
+      background-color: #FCFED5
+
+.panel-add-project
+  text-align: center
+  margin-bottom: 60px
+
+  .btn-add-project, .btn-add-project:active
+    background: #428BCA url('./project-add-icon.png') no-repeat 10px 4px
+    padding-left: 43px
