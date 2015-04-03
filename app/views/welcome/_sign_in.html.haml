@@ -1,0 +1,52 @@
+.panel-welcome-section.panel-sign-in
+  .title
+    = t 'sign_in_title'
+  .form{ id: 'signInForm' }
+    = form_for(user_resource,
+                    url: session_path(user_resource_name),
+                    html: { name: 'sign_in_user',
+                            novalidate: true,
+                            'ng-controller' => "signInController",
+                            'ng-submit' => "submit(user)",
+                            'onsubmit' => "return false" },
+                    format: :json,
+                    remote: true ) do |f|
+      .form-group{ 'ng-class' => "{'has-error': sign_in_user['user[email]'].$invalid }" }
+        = f.label :email
+        = f.text_field :email,
+                        class: 'form-control',
+                        placeholder: :email,
+                        'ng-model' => "user.email",
+                        'valid-email' => true
+        .help-inline
+          .help-block.with-errors{ 'ng-show' => "sign_in_user['user[email]'].$invalid" }
+            %ul.list-unstyled
+              %li{ 'ng-show' => "sign_in_user['user[email]'].$error.not_empty" }
+                = t 'sign_in_form.error.attribute.email.not_empty'
+              %li{ 'ng-show' => "sign_in_user['user[email]'].$error.email_address" }
+                = t 'sign_in_form.error.attribute.email.email_address'
+      .form-group{ 'ng-class' => "{'has-error': sign_in_user['user[password]'].$invalid }" }
+        = f.label :password
+        = f.password_field :password,
+                            class: 'form-control',
+                            placeholder: :password,
+                            min: password_length.first,
+                            max: password_length.last,
+                            'ng-model' => "user.password",
+                            'valid-password' => true
+        .help-inline
+          .help-block.with-errors{ 'ng-show' => "sign_in_user['user[password]'].$invalid" }
+            %ul.list-unstyled
+              %li{ 'ng-show' => "sign_in_user['user[password]'].$error.not_empty" }
+                = t 'sign_in_form.error.attribute.password.not_empty'
+              %li{ 'ng-show' => "sign_in_user['user[password]'].$error.string_length" }
+                = t 'sign_in_form.error.attribute.password.string_length'
+      = f.submit t('sign_in_button'), class: 'btn btn-primary', 'ng-disabled' => "!formValid() || disabled_submit"
+      .help-inline.has-error
+        .help-block.with-errors{ 'ng-show' => "server_errors" }
+          %ul.list-unstyled{ 'ng-repeat' => "server_error in server_errors" }
+            %li= "{{ server_error }}"
+  .or
+    = t 'sign_in_or'
+  .social
+    = link_to image_tag('facebook.png'), user_omniauth_authorize_path(:facebook)

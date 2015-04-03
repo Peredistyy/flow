@@ -4,9 +4,9 @@ en:
   add_task_input_placeholder: Start typing here to create a task...
   add_task_button: Add Task
   add_project_button: Add TODO List
-  sing_up_title: Sing Up
-  sing_up_button: Sing Up
-  sing_up_form:
+  sign_up_title: Sign Up
+  sign_up_button: Sign Up
+  sign_up_form:
     error:
       attribute:
         email:
@@ -19,6 +19,18 @@ en:
           not_empty: The password confirmation is required
           not_match: Passwords do not match
           string_length: 'The password confirmation is not valid: 6-20 symbols'
-  sing_in_title: Sing In
-  sing_in_button: Sing In
-  sing_in_or: or
+  sign_in_title: Sign In
+  sign_in_button: Sign In
+  sign_in_or: or
+  sign_in_form:
+    error:
+      attribute:
+        email:
+          not_empty: The email address is required
+          email_address: The input is not a valid email address
+        password:
+          not_empty: The password is required
+          string_length: 'The password is not valid: 6-20 symbols'
+      message:
+        failed: 'Login failed.'
+  sign_out: 'Sign Out'

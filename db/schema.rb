@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20150401102825) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
+    t.string   "provider",               limit: 255
+    t.string   "uid",                    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,5 @@
+.panel.panel-logout
+  .panel-body
+    = current_user.email
+    %br
+    = link_to t('sign_out'), destroy_user_session_path, :method => :delete
