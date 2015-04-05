@@ -4,6 +4,7 @@ en:
   add_task_input_placeholder: Start typing here to create a task...
   add_task_button: Add Task
   add_project_button: Add TODO List
+  add_project_input_placeholder: Start typing here to create a project...
   sign_up_title: Sign Up
   sign_up_button: Sign Up
   sign_up_form:
@@ -32,5 +33,9 @@ en:
           not_empty: The password is required
           string_length: 'The password is not valid: 6-20 symbols'
       message:
-        failed: 'Login failed.'
-  sign_out: 'Sign Out'
+        failed: Login failed.
+  sign_out: Sign Out
+  destroy_confirm: Are you sure you want to delete this?
+  yes: Yes
+  no: No
+  save: Save

@@ -2,15 +2,14 @@
   .title
     = t 'sign_up_title'
   .form{ id: 'signUpForm' }
-    = form_for(user_resource,
+    = form_for user_resource,
                     url: registration_path(user_resource_name),
                     html: { name: 'sign_up_user',
                             novalidate: true,
                             'ng-controller' => "signUpController",
                             'ng-submit' => "submit(user)",
-                            'onsubmit' => "return false" },
-                          format: :json,
-                          remote: true) do |f|
+                            'onsubmit' => "return false",
+                    } do |f|
       .form-group{ 'ng-class' => "{'has-error': sign_up_user['user[email]'].$invalid }" }
         = f.label :email
         = f.text_field :email,

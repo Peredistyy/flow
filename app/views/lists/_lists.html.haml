@@ -1,0 +1,66 @@
+.div{ 'ng-controller' => 'projectsListController',
+      'projects-url' => projects_path }
+
+  .container{ 'ng-show' => 'show_loader' }
+    .col-md-8.col-md-offset-2.panel-loader
+      = image_tag 'loader.gif'
+
+  %script{ type: 'text/ng-template', id: 'destroy_confirm' }
+    .modal-body= t 'destroy_confirm'
+    .modal-footer
+      %button.btn.btn-primary{ 'ng-click' => "yes()" }= t 'yes'
+      %button.btn.btn-warning{ 'ng-click' => "no()" }= t 'no'
+
+  .container{ 'ng-repeat' => 'project in projects' }
+    .col-md-8.col-md-offset-2
+      .panel-project
+        .panel-heading
+          = image_tag 'project-icon.png', class: 'panel-heading-icon'
+          %lable{ 'ng-show' => "!project.enable_edit" }= "{{ project.title }}"
+          %from.project-edit-from{ 'ng-show' => "project.enable_edit" }
+            .form-group{ 'ng-class' => "{'has-error': project.error }" }
+              %input.form-control.title{ type: 'text', 'ng-model' => "project.title" }
+              %button.btn.btn-primary.btn-save{ 'ng-click' => "save(project.id)" }= t 'save'
+          %span.pull-right
+            %button.project-edit{ 'ng-show' => "!project.enable_edit", 'ng-click' => "edit(project.id)" }
+            %span.project-icon-separator
+              |
+            %button.project-delete{ 'ng-click' => "destroy(project.id)" }
+        .panel-add-task
+          = image_tag 'project-task-add-icon.png', class: 'project-task-add'
+          = form_for :task,
+                      url: tasks_path,
+                      html: { name: 'add_task',
+                              novalidate: true,
+                              'ng-controller' => "addTaskController",
+                              'ng-submit' => "submit(task, project)",
+                              'onsubmit' => "return false",
+                      } do |f|
+            .input-group.project-task-add-input-group{ 'ng-class' => "{'has-error': task.error }" }
+              = f.text_field :title,
+                              class: 'form-control',
+                              type: 'text',
+                              placeholder: t('add_task_input_placeholder'),
+                              'ng-model' => "task.title"
+              %input{ type: 'hidden', 'ng-model' => "project.id" }
+              %span.input-group-btn
+                %button.btn.btn-success{ type: 'submit', 'ng-disabled' => "disabled_submit" }= t 'add_task_button'
+        .panel-body{ 'ng-controller' => "tasksListController",
+                      'ng-init' => "tasks = project.tasks",
+                      'tasks-url' => tasks_path }
+          %table.table.table-bordered.table-hover.table-tasks{ 'ng-controller' => "tasksListController",
+                                                                'ng-init' => "tasks = project.tasks",
+                                                                'tasks-url' => tasks_path,
+                                                                'tasks-resorted-url' => url_for(controller: 'tasks', action: 'resorted') }
+            %tbody{'ng-model' => "tasks", 'ui-sortable' => "sortableOptions" }
+              %tr{ 'ng-repeat' => "task in tasks" }
+                %td.title
+                  {{ task.title }}
+                %td.actions
+                  %button.project-task-open
+                  %span.project-task-icon-separator
+                    |
+                  %button.project-task-edit
+                  %span.project-task-icon-separator
+                    |
+                  %button.project-task-delete{ 'ng-click' => "destroy(task.id)" }

@@ -8,5 +8,9 @@ Rails.application.routes.draw do
 
   root to: 'welcome#index'
 
+  get 'lists', to: 'lists#index'
+
   resources :projects
+  resources :tasks
+  post 'tasks/resorted', to: 'tasks#resorted'
 end

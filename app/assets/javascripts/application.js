@@ -12,5 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require angular
+//= require angular-animate
+//= require angular-ui-bootstrap
+//= require angular-ui-bootstrap-tpls
+//= require angular-ui-sortable.js
 //= require_tree .

@@ -11,4 +11,8 @@ gem 'jquery-rails', '~> 4.0.1'
 gem 'angularjs-rails', '~> 1.3.1'
 gem 'angular_rails_csrf', '~> 1.0.1'
 gem 'omniauth-facebook', '~> 2.0.1'
+gem 'cancancan', '~> 1.10'
+gem 'angular-ui-bootstrap-rails', '~> 0.12.0'
+gem 'jquery-ui-rails', '~> 5.0.1'
+
 

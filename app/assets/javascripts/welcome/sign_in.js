@@ -1,11 +1,25 @@
 var signInFormModule = angular.module('signInForm', []);
 
+/**
+ * Sign In Controller
+ */
 signInFormModule
     .controller('signInController', ['$scope', '$http', '$attrs', function ($scope, $http, $attrs) {
+
+        /**
+         * Validate all fields on sign in form
+         *
+         * @return boolean
+         */
         $scope.formValid = function () {
             return $scope.emailValid && $scope.passwordValid;
         }
 
+        /**
+         * Submit sign in form data
+         *
+         * @param user
+         */
         $scope.submit = function (user) {
             $scope.disabled_submit = true;
             $scope.server_errors = {};
@@ -25,6 +39,9 @@ signInFormModule
             });
         }
     }])
+    /**
+     * Email field validator
+     */
     .directive('validEmail', function () {
         return {
             require: 'ngModel',
@@ -33,7 +50,7 @@ signInFormModule
                     var not_empty = viewValue !== '';
                     ctrl.$setValidity('not_empty', not_empty);
 
-                    var email_address = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/.test(viewValue);
+                    var email_address = !not_empty || /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/.test(viewValue);
                     ctrl.$setValidity('email_address', email_address);
 
                     scope.emailValid = not_empty && email_address;
@@ -43,6 +60,9 @@ signInFormModule
             }
         }
     })
+    /**
+     * Password field validator
+     */
     .directive('validPassword', function () {
         return {
             require: 'ngModel',
@@ -62,6 +82,9 @@ signInFormModule
         }
     });
 
+/**
+ * SignInForm app initialize
+ */
 angular.element(document).ready(function() {
     angular.bootstrap(document.getElementById('signInForm'), ['signInForm']);
 });

@@ -1,0 +1,24 @@
+.container
+  .col-md-8.col-md-offset-2
+    .panel-add-project
+      = form_for :project,
+                      url: projects_path,
+                      html: { name: 'add_project',
+                              novalidate: true,
+                              'ng-controller' => "addProjectController",
+                              'ng-submit' => "submit(project)",
+                              'onsubmit' => "return false",
+                      } do |f|
+        .input-group{ 'ng-class' => "{'has-error': add_project['project[title]'].$invalid }" }
+          .input-box{ 'ng-class' => "{'show': toggle}" }
+            %button.close.add-project-close{ type: 'button', 'ng-click' => "hide()" }
+              %span{ 'aria-hidden' => 'true' } &times;
+            = f.text_field :title,
+                            placeholder: t('add_project_input_placeholder'),
+                            class: 'form-control add-project-input',
+                            'ng-model' => "project.title"
+          %button.btn.btn-primary.btn-add-project{ type: 'submit', 'ng-disabled' => "disabled_submit" }= t 'add_project_button'
+        .help-inline.has-error
+          .help-block.with-errors{ 'ng-show' => "server_errors" }
+            %ul.list-unstyled{ 'ng-repeat' => "server_error in server_errors" }
+              %li= "{{ server_error }}"

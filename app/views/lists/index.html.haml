@@ -1,0 +1,10 @@
+.container
+  .col-md-8.col-md-offset-2
+    .main-title
+      = t 'main_title'
+      .from
+        = t 'main_title_from', name: current_user.email
+
+%div{ id: 'projectsList' }
+  = render 'lists/lists'
+  = render 'lists/panel_add_project'

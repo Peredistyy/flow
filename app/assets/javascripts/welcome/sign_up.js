@@ -1,11 +1,25 @@
 var signUpFormModule = angular.module('signUpForm', []);
 
+/**
+ * Sign Up Controller
+ */
 signUpFormModule
     .controller('signUpController', ['$scope', '$http', '$attrs', function ($scope, $http, $attrs) {
+
+        /**
+         * Validate all fields on sign up form
+         *
+         * @return boolean
+         */
         $scope.formValid = function () {
             return $scope.emailValid && $scope.passwordValid && $scope.passwordConfirmationValid;
         }
 
+        /**
+         * Submit sign up form data
+         *
+         * @param user
+         */
         $scope.submit = function (user) {
             $scope.disabled_submit = true;
             $scope.server_errors = {};
@@ -25,6 +39,9 @@ signUpFormModule
             });
         }
     }])
+    /**
+     * Email field validator
+     */
     .directive('validEmail', function () {
         return {
             require: 'ngModel',
@@ -33,7 +50,7 @@ signUpFormModule
                     var not_empty = viewValue !== '';
                     ctrl.$setValidity('not_empty', not_empty);
 
-                    var email_address = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/.test(viewValue);
+                    var email_address = !not_empty || /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/.test(viewValue);
                     ctrl.$setValidity('email_address', email_address);
 
                     scope.emailValid = not_empty && email_address;
@@ -43,6 +60,9 @@ signUpFormModule
             }
         }
     })
+    /**
+     * Password field validator
+     */
     .directive('validPassword', function () {
         return {
             require: 'ngModel',
@@ -61,6 +81,9 @@ signUpFormModule
             }
         }
     })
+    /**
+     * Password confirmation field validator
+     */
     .directive('validPasswordConfirmation', function () {
         return {
             require: 'ngModel',
@@ -72,7 +95,7 @@ signUpFormModule
                     var string_length = !not_empty || viewValue.length >= attrs.min && viewValue.length <= attrs.max;
                     ctrl.$setValidity('string_length', string_length);
 
-                    var not_match = viewValue === scope.sign_up_user['user[password]'].$viewValue;
+                    var not_match = !not_empty || viewValue === scope.sign_up_user['user[password]'].$viewValue;
                     ctrl.$setValidity('not_match', not_match);
 
                     scope.passwordConfirmationValid = not_empty && string_length && not_match;
@@ -83,6 +106,9 @@ signUpFormModule
         }
     });
 
+/**
+ * SignUpForm app initialize
+ */
 angular.element(document).ready(function() {
     angular.bootstrap(document.getElementById('signUpForm'), ['signUpForm']);
 });
