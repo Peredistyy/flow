@@ -14,6 +14,7 @@ test:
 
 production:
   <<: *default
+  adapter: postgresql
   database: flow
   username: flow
   password: <%= ENV['FLOW_DATABASE_PASSWORD'] %>

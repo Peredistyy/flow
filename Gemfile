@@ -17,4 +17,8 @@ gem 'paperclip', '~> 4.2.1'
 gem 'uglifier', '~> 2.7.1'
 gem 'rails_12factor', '~> 0.0.1'
 
+group :development do
+  gem 'pg'
+end
+
 
