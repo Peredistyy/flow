@@ -14,5 +14,6 @@ gem 'omniauth-facebook', '~> 2.0.1'
 gem 'cancancan', '~> 1.10'
 gem 'angular-ui-bootstrap-rails', '~> 0.12.0'
 gem 'jquery-ui-rails', '~> 5.0.1'
+gem 'paperclip', '~> 4.2.1'
 
 

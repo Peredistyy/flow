@@ -17,5 +17,7 @@
 //= require angular-animate
 //= require angular-ui-bootstrap
 //= require angular-ui-bootstrap-tpls
-//= require angular-ui-sortable.js
+//= require angular-ui-sortable
+//= require angular-file-upload.min
+//= require angular-file-upload-shim.min
 //= require_tree .

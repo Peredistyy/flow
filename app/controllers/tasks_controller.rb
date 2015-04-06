@@ -14,6 +14,16 @@ class TasksController < ApplicationController
     end
   end
 
+  def update
+    @task = Task.find(params[:id])
+
+    if can?(:update, @task) && @task.update(task_params)
+      render json: { success: true }
+    else
+      render json: { success: false }
+    end
+  end
+
   def destroy
     @task = Task.find(params[:id])
 
@@ -41,7 +51,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title)
+    params.require(:task).permit(:title, :done, :deadline)
   end
 
   def project_params

@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150405124810) do
+ActiveRecord::Schema.define(version: 20150406091558) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "message",             limit: 65535, null: false
+    t.string   "attach_file_name",    limit: 255
+    t.string   "attach_content_type", limit: 255
+    t.integer  "attach_file_size",    limit: 4
+    t.datetime "attach_updated_at"
+    t.integer  "task_id",             limit: 4
+    t.integer  "user_id",             limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
+
+  add_index "comments", ["task_id"], name: "index_comments_on_task_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "title",      limit: 255, default: "", null: false
@@ -25,7 +40,9 @@ ActiveRecord::Schema.define(version: 20150405124810) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "title",      limit: 255, default: "",    null: false
+    t.boolean  "done",       limit: 1,   default: false
     t.integer  "order",      limit: 4,   default: 65536, null: false
+    t.date     "deadline"
     t.integer  "project_id", limit: 4
     t.integer  "user_id",    limit: 4
     t.datetime "created_at",                             null: false

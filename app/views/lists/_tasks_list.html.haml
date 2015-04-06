@@ -1,0 +1,22 @@
+.panel-body
+  %table.table.table-bordered.table-hover.table-tasks{ 'ng-controller' => "tasksListController",
+                                                        'ng-init' => "setTasks(project.tasks)",
+                                                        'tasks-url' => tasks_path,
+                                                        'tasks-resorted-url' => url_for(controller: 'tasks', action: 'resorted') }
+    %tbody{'ng-model' => "tasks", 'ui-sortable' => "sortableOptions" }
+      %tr{ 'ng-repeat' => "task in tasks", 'ng-class' => "{'done': task.done }" }
+        %td.title
+          %lable{ 'ng-show' => "!task.enable_edit" }= "{{ task.title }}"
+          %from.task-edit-from{ 'ng-show' => "task.enable_edit" }
+            .form-group{ 'ng-class' => "{'has-error': task.error }" }
+              %input.form-control.title{ type: 'text', 'ng-model' => "task.title" }
+              %button.btn.btn-primary.btn-save{ 'ng-click' => "save(task.id)" }= t 'save'
+          = render 'lists/task_detail'
+        %td.actions
+          %button.project-task-open{ 'ng-click' => "open(task.id)" }
+          %span.project-task-icon-separator
+            |
+          %button.project-task-edit{ 'ng-disabled' => "task.enable_edit", 'ng-click' => "edit(task.id)" }
+          %span.project-task-icon-separator
+            |
+          %button.project-task-delete{ 'ng-click' => "destroy(task.id)" }

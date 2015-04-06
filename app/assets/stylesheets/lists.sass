@@ -104,6 +104,9 @@
         cursor: -moz-grabbing
         cursor: -webkit-grabbing
 
+      tr.done
+        background: #EEE
+
       tr
         width: 730px
         background: #FFF
@@ -114,15 +117,32 @@
         td.title
           width: 570px
 
+          .task-edit-from
+
+            .form-group
+              display: inline
+
+            .title
+              display: inline
+              width: 500px
+              height: 25px
+
+            .btn-save
+              height: 25px
+              padding: 0px
+              width: 45px
+              margin-bottom: 1px
+
         td.actions
           width: 160px
           text-align: center
 
-          .project-task-icon
+          .project-task-icon, .project-task-icon:focus, .project-task-icon:hover
             width: 13px
             height: 13px
             border: 0px
             margin: 0px
+            outline: none
 
           .project-task-open
             @extend .project-task-icon
@@ -141,6 +161,49 @@
             margin-left: 3px
             margin-right: 3px
             font-size: 13px
+
+        .task-detail-panel
+          -webkit-transition: max-height 0.2s ease-out
+          transition: max-height 0.2s ease-out
+          max-height: 0px
+          overflow: hidden
+          font-size: 14px
+
+          .inner-block
+            border-top: 1px solid #DDD
+            margin-top: 15px
+            padding-top: 5px
+
+            .done
+              float: left
+
+            .deadline
+              float: right
+
+            .comments
+              clear: left
+              margin-top: 70px
+
+              .list
+                .comment
+                  border-bottom: 1px solid #DDD
+                  padding: 5px
+
+                  .text
+                    display: inline-block
+                    width: 90%
+
+              .add_panel
+                margin-top: 5px
+
+                .message
+                  display: inline
+                  width: 495px
+
+        .task-detail-panel.show
+          -webkit-transition: max-height 0.5s ease-in
+          transition: max-height 0.5s ease-in
+          max-height: 500px
 
     .table-hover > tbody > tr:hover > td, > th
       background-color: #FCFED5

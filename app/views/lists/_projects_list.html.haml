@@ -45,22 +45,4 @@
               %input{ type: 'hidden', 'ng-model' => "project.id" }
               %span.input-group-btn
                 %button.btn.btn-success{ type: 'submit', 'ng-disabled' => "disabled_submit" }= t 'add_task_button'
-        .panel-body{ 'ng-controller' => "tasksListController",
-                      'ng-init' => "tasks = project.tasks",
-                      'tasks-url' => tasks_path }
-          %table.table.table-bordered.table-hover.table-tasks{ 'ng-controller' => "tasksListController",
-                                                                'ng-init' => "tasks = project.tasks",
-                                                                'tasks-url' => tasks_path,
-                                                                'tasks-resorted-url' => url_for(controller: 'tasks', action: 'resorted') }
-            %tbody{'ng-model' => "tasks", 'ui-sortable' => "sortableOptions" }
-              %tr{ 'ng-repeat' => "task in tasks" }
-                %td.title
-                  {{ task.title }}
-                %td.actions
-                  %button.project-task-open
-                  %span.project-task-icon-separator
-                    |
-                  %button.project-task-edit
-                  %span.project-task-icon-separator
-                    |
-                  %button.project-task-delete{ 'ng-click' => "destroy(task.id)" }
+        = render 'lists/tasks_list'
