@@ -34,7 +34,7 @@ projectsList
 
                     $http.delete($attrs.commentsUrl + '/' + id);
                 });
-            }
+            };
 
             $mediator.$on('create_comment', function (event, comment) {
                 $scope.comments.push(comment);

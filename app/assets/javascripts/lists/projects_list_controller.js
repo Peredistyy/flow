@@ -18,7 +18,7 @@ projectsList
                 }
 
                 return project;
-            }
+            };
 
             var replaceProject = function (project) {
                 for (var key in $scope.projects) {
@@ -27,7 +27,7 @@ projectsList
                         break;
                     }
                 }
-            }
+            };
 
             /**
              * Load all project current user
@@ -44,7 +44,7 @@ projectsList
 
                         $scope.show_loader = false;
                     });
-            }
+            };
 
             /**
              * Destroy project by id
@@ -74,7 +74,7 @@ projectsList
 
                     $http.delete($attrs.projectsUrl + '/' + id);
                 });
-            }
+            };
 
             /**
              * Enable edit project by id
@@ -83,7 +83,7 @@ projectsList
              */
             $scope.edit = function (id) {
                 getProjectById(id).enable_edit = true;
-            }
+            };
 
             /**
              * Save project
@@ -106,7 +106,7 @@ projectsList
                         project.error = true;
                     }
                 });
-            }
+            };
 
             $mediator.$on('create_project', function (event, project) {
                 $scope.projects.push(project);

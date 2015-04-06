@@ -13,7 +13,7 @@ signUpFormModule
          */
         $scope.formValid = function () {
             return $scope.emailValid && $scope.passwordValid && $scope.passwordConfirmationValid;
-        }
+        };
 
         /**
          * Submit sign up form data
@@ -37,7 +37,7 @@ signUpFormModule
 
                 $scope.disabled_submit = false;
             });
-        }
+        };
     }])
     /**
      * Email field validator

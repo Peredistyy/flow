@@ -17,7 +17,7 @@ projectsList
                 }
 
                 return task;
-            }
+            };
 
             /**
              * Tasks setter
@@ -29,7 +29,7 @@ projectsList
                 for (var key in $scope.tasks) {
                     $scope.tasks[key].deadline = new Date($scope.tasks[key].deadline);
                 }
-            }
+            };
 
             /**
              * Destroy task by id
@@ -59,7 +59,7 @@ projectsList
 
                     $http.delete($attrs.tasksUrl + '/' + id);
                 });
-            }
+            };
 
             /**
              * Open task by id
@@ -68,7 +68,7 @@ projectsList
              */
             $scope.open = function (id) {
                 getTaskById(id).opened = !getTaskById(id).opened;
-            }
+            };
 
             /**
              * Enable edit task by id
@@ -77,7 +77,7 @@ projectsList
              */
             $scope.edit = function (id) {
                 getTaskById(id).enable_edit = true;
-            }
+            };
 
             /**
              * Save task
@@ -100,7 +100,7 @@ projectsList
                         task.error = true;
                     }
                 });
-            }
+            };
 
             /**
              * Sortable options

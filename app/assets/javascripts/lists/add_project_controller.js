@@ -12,7 +12,7 @@ projectsList
             $scope.hide = function () {
                 $scope.toggle = false;
                 $scope.project.title = '';
-            }
+            };
 
             /**
              * Show form
@@ -25,7 +25,7 @@ projectsList
                 $scope.toggle = true;
 
                 return result;
-            }
+            };
 
             /**
              * Submit form data
@@ -57,6 +57,6 @@ projectsList
                         $scope.disabled_submit = false;
                     });
                 }
-            }
+            };
         }
     ]);
