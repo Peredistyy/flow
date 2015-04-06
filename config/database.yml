@@ -6,11 +6,15 @@ default: &default
 
 development:
   <<: *default
-  database: flow_development
+  database: flow_dev
+  username: root
+  password: mysql
 
 test:
   <<: *default
   database: flow_test
+  username: root
+  password: mysql
 
 production:
   <<: *default
