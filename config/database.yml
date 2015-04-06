@@ -6,18 +6,14 @@ default: &default
 
 development:
   <<: *default
-  database: flow_dev
-  username: root
-  password: mysql
+  database: flow_development
 
 test:
   <<: *default
   database: flow_test
-  username: root
-  password: mysql
 
 production:
   <<: *default
   database: flow
-  username: root
-  password: mysql
+  username: flow
+  password: <%= ENV['FLOW_DATABASE_PASSWORD'] %>

@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.1'
-gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
 gem 'haml', '~> 4.0.1'
 gem 'bootstrap-sass', '~> 3.2.0'
