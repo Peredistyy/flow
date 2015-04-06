@@ -6,7 +6,9 @@
           %input{ type: 'checkbox', 'ng-model' => "task.done", 'ng-change' => "save(task.id)" }= t 'done'
     .deadline
       %label= t 'deadline'
-      %input.form-control{ type: 'date', 'ng-model' => "task.deadline", 'ng-change' => "save(task.id)" }
+      %input.form-control{ type: 'date',
+                            'ng-model' => "task.deadline",
+                            'ng-change' => "save(task.id)" }
     .comments{ 'ng-controller' => "commentsListController",
                 'ng-init' => "comments = task.comments",
                 'comments-url' => comments_path }
@@ -40,7 +42,6 @@
               %button.btn.btn-primary.btn-save{ type: 'submit', 'ng-disabled' => "disabled_submit" }= t 'send'
           .input-group
             = f.file_field :attach,
-                            class: 'form-control',
                             'ng-file-select' => true,
                             'ng-file-change' => "fileSelected($files, $event)",
                             'ng-model' => "attach"

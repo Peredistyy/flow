@@ -18,7 +18,12 @@
 @import "bootstrap"
 
 body
-  background: #CAC8B1 url('./background.png') left bottom repeat-x
+  // Not optimize this. Necessary for FireFox
+  background-image: url('./background.png')
+  background-color: #CAC8B1
+  background-repeat: repeat-x
+  background-attachment: fixed
+  background-position: bottom
 
   .footer
     margin-bottom: 30px

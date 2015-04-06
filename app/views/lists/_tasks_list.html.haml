@@ -13,10 +13,11 @@
               %button.btn.btn-primary.btn-save{ 'ng-click' => "save(task.id)" }= t 'save'
           = render 'lists/task_detail'
         %td.actions
-          %button.project-task-open{ 'ng-click' => "open(task.id)" }
-          %span.project-task-icon-separator
-            |
-          %button.project-task-edit{ 'ng-disabled' => "task.enable_edit", 'ng-click' => "edit(task.id)" }
-          %span.project-task-icon-separator
-            |
-          %button.project-task-delete{ 'ng-click' => "destroy(task.id)" }
+          .inner-actions
+            %button.project-task-delete{ 'ng-click' => "destroy(task.id)" }
+            %span.project-task-icon-separator
+              |
+            %button.project-task-edit{ 'ng-disabled' => "task.enable_edit", 'ng-click' => "edit(task.id)" }
+            %span.project-task-icon-separator
+              |
+            %button.project-task-open{ 'ng-click' => "open(task.id)" }
