@@ -14,4 +14,10 @@ projectsList
 //= require ./lists/add_task_controller
 //= require ./lists/comments_list_controller
 //= require ./lists/add_comment_controller
-//= require ./lists/initialize
+
+/**
+ * ProjectsList app initialize
+ */
+angular.element(document).ready(function() {
+    angular.bootstrap(document.getElementById('projectsList'), ['projectsList']);
+});
