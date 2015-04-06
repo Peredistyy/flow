@@ -15,5 +15,6 @@ gem 'angular-ui-bootstrap-rails', '~> 0.12.0'
 gem 'jquery-ui-rails', '~> 5.0.1'
 gem 'paperclip', '~> 4.2.1'
 gem 'uglifier', '~> 2.7.1'
+gem 'rails_12factor', '~> 0.0.1'
 
 
