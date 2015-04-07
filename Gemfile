@@ -18,4 +18,7 @@ gem 'uglifier', '~> 2.7.1'
 gem 'rails_12factor', '~> 0.0.1'
 gem 'pg'
 
-
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails', '~> 4.5.0'
+end

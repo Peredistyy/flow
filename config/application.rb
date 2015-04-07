@@ -24,5 +24,9 @@ module Flow
     config.active_record.raise_in_transactional_callbacks = true
 
     config.autoload_paths += %W(#{config.root}/lib)
+
+    config.generators do |g|
+      g.factory_girl false
+    end
   end
 end

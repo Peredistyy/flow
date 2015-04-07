@@ -7,6 +7,7 @@ class Project < ActiveRecord::Base
 
   def as_json(options=nil)
     super(
+        only: [ :id, :title ],
         include: {
             tasks: {
                 only: [ :id, :title, :done, :deadline ],

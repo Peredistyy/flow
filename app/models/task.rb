@@ -8,4 +8,10 @@ class Task < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
 
+  def as_json(options=nil)
+    super(
+        only: [ :id, :title, :done, :order, :deadline, :project_id, :user_id ]
+    )
+  end
+
 end
