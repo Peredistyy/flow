@@ -1,8 +1,8 @@
 /**
  * Tasks List Controller
  */
-projectsList.controller('tasksListController', ['$scope', '$http', '$attrs', '$modal',
-    function ($scope, $http, $attrs, $modal) {
+projectsList.controller('tasksListController', ['$scope', '$http', '$attrs', '$modal', '$mediator',
+    function ($scope, $http, $attrs, $modal, $mediator) {
         $scope.tasks = [];
 
         var getTaskById = function (id) {
@@ -26,7 +26,12 @@ projectsList.controller('tasksListController', ['$scope', '$http', '$attrs', '$m
         $scope.setTasks = function (tasks) {
             $scope.tasks = tasks;
             for (var key in $scope.tasks) {
-                $scope.tasks[key].deadline = new Date($scope.tasks[key].deadline);
+                if (null != $scope.tasks[key].deadline) {
+                    $scope.tasks[key].deadline = new Date($scope.tasks[key].deadline);
+                } else {
+                    $scope.tasks[key].deadline = '';
+                }
+
             }
         };
 
@@ -88,10 +93,15 @@ projectsList.controller('tasksListController', ['$scope', '$http', '$attrs', '$m
 
             task.error = false;
 
+            var clone_task = angular.copy(task);
+            if (null != clone_task.deadline) {
+                clone_task.deadline = new Date($.datepicker.formatDate('yy-mm-dd', clone_task.deadline));
+            }
+
             $http({
                 method  : 'put',
                 url     : $attrs.tasksUrl + '/' + id,
-                data    : { task: task }
+                data    : { task: clone_task }
             }).success(function(data) {
                 if (data['success']) {
                     task.enable_edit = false;
@@ -118,5 +128,10 @@ projectsList.controller('tasksListController', ['$scope', '$http', '$attrs', '$m
             },
             axis: 'y'
         };
+
+        $mediator.$on('create_task', function (event, task) {
+            task.deadline = new Date('');
+            $scope.tasks.push(task);
+        });
     }
 ]);

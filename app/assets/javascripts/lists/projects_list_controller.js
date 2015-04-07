@@ -19,15 +19,6 @@ projectsList.controller('projectsListController', ['$scope', '$http', '$attrs', 
             return project;
         };
 
-        var replaceProject = function (project) {
-            for (var key in $scope.projects) {
-                if (project.id === $scope.projects[key].id) {
-                    $scope.projects[key] = project;
-                    break;
-                }
-            }
-        };
-
         /**
          * Load all project current user
          */
@@ -109,10 +100,6 @@ projectsList.controller('projectsListController', ['$scope', '$http', '$attrs', 
 
         $mediator.$on('create_project', function (event, project) {
             $scope.projects.push(project);
-        });
-
-        $mediator.$on('replace_project', function (event, project) {
-            replaceProject(project);
         });
 
         $scope.loadProjectsList();

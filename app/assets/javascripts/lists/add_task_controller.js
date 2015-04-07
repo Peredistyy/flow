@@ -25,8 +25,7 @@ projectsList.controller('addTaskController', ['$scope', '$http', '$attrs', '$med
                 }).success(function(data) {
                     if (data['success']) {
                         task.title = '';
-                        project.tasks.push(data['task']);
-                        $mediator.$emit('replace_project', project);
+                        $mediator.$emit('create_task', data['task']);
                     } else {
                         task.error = true;
                     }
