@@ -33,7 +33,7 @@ projectsList.controller('addCommentController', ['$scope', '$http', '$attrs', '$
                     if (data['success']) {
                         comment.message = '';
                         comment.attach = '';
-                        $mediator.$emit('create_comment', data['comment']);
+                        $mediator.$emit('create_comment', {comment: data['comment'], task: task});
                     } else {
                         comment.error = true;
                     }

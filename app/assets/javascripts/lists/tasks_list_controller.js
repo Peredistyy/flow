@@ -4,6 +4,7 @@
 projectsList.controller('tasksListController', ['$scope', '$http', '$attrs', '$modal', '$mediator',
     function ($scope, $http, $attrs, $modal, $mediator) {
         $scope.tasks = [];
+        $scope.project;
 
         var getTaskById = function (id) {
             var task;
@@ -33,6 +34,15 @@ projectsList.controller('tasksListController', ['$scope', '$http', '$attrs', '$m
                 }
 
             }
+        };
+
+        /**
+         * Project setter
+         *
+         * @param project
+         */
+        $scope.setProject = function (project) {
+            $scope.project = project;
         };
 
         /**
@@ -129,9 +139,11 @@ projectsList.controller('tasksListController', ['$scope', '$http', '$attrs', '$m
             axis: 'y'
         };
 
-        $mediator.$on('create_task', function (event, task) {
-            task.deadline = new Date('');
-            $scope.tasks.push(task);
+        $mediator.$on('create_task', function (event, data) {
+            if (data.project.id == $scope.project.id) {
+                data.task.deadline = new Date('');
+                $scope.tasks.push(data.task);
+            }
         });
     }
 ]);

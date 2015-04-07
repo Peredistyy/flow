@@ -1,6 +1,6 @@
 .panel-body
   %table.table.table-bordered.table-hover.table-tasks{ 'ng-controller' => 'tasksListController',
-                                                        'ng-init' => 'setTasks(project.tasks)',
+                                                        'ng-init' => 'setTasks(project.tasks); setProject(project);',
                                                         'tasks-url' => tasks_path,
                                                         'tasks-resorted-url' => url_for(controller: 'tasks', action: 'resorted') }
     %tbody{'ng-model' => 'tasks', 'ui-sortable' => 'sortableOptions' }

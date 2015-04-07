@@ -35,11 +35,13 @@ projectsList.controller('commentsListController', ['$scope', '$http', '$attrs', 
             });
         };
 
-        $mediator.$on('create_comment', function (event, comment) {
+        $mediator.$on('create_comment', function (event, data) {
             if (undefined == $scope.comments) {
                 $scope.comments = [];
             }
-            $scope.comments.push(comment);
+            if (data.task.id == $scope.task.id) {
+                $scope.comments.push(data.comment);
+            }
         });
     }
 ]);
