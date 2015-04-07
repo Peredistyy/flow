@@ -1,7 +1,7 @@
 class Task < ActiveRecord::Base
 
   validates :title, presence: true
-  
+
   default_scope { order order: :asc }
 
   belongs_to :project

@@ -3,14 +3,14 @@
     .done
       .checkbox
         %label
-          %input{ type: 'checkbox', 'ng-model' => "task.done", 'ng-change' => "save(task.id)" }= t 'done'
+          %input{ type: 'checkbox', 'ng-model' => 'task.done', 'ng-change' => 'save(task.id)' }= t 'done'
     .deadline
       %label= t 'deadline'
       %input.form-control{ type: 'date',
-                            'ng-model' => "task.deadline",
-                            'ng-change' => "save(task.id)" }
-    .comments{ 'ng-controller' => "commentsListController",
-                'ng-init' => "comments = task.comments",
+                            'ng-model' => 'task.deadline',
+                            'ng-change' => 'save(task.id)' }
+    .comments{ 'ng-controller' => 'commentsListController',
+                'ng-init' => 'comments = task.comments',
                 'comments-url' => comments_path }
       %b= t 'comments'
       .list
@@ -18,8 +18,11 @@
           .text
             {{ comment.message }}
             %br
-            = link_to '{{ comment.attach_file_name }}', '{{ comment.attach_url }}', 'ng-show' => 'comment.attach_url'
-          %button.close{ type: 'button', 'ng-click' => "destroy(comment.id)" }
+            = link_to '{{ comment.attach_file_name }}',
+                      '{{ comment.attach_url }}',
+                      'ng-show' => 'comment.attach_url',
+                      target: '_blank'
+          %button.close{ type: 'button', 'ng-click' => 'destroy(comment.id)' }
             %span{ 'aria-hidden' => 'true' } &times;
       .add_panel
         = form_for :comment,
@@ -27,21 +30,21 @@
                     html: { name: 'add_comment',
                             novalidate: true,
                             'comments-url' => comments_path,
-                            'ng-controller' => "addCommentController",
-                            'ng-submit' => "submit(comment, task)",
-                            'onsubmit' => "return false",
+                            'ng-controller' => 'addCommentController',
+                            'ng-submit' => 'submit(comment, task)',
+                            'onsubmit' => 'return false',
                     } do |f|
           .input-group{ 'ng-class' => "{'has-error': comment.error }" }
             = f.text_field :message,
                             class: 'form-control message',
                             type: 'text',
                             placeholder: t('new_comment'),
-                            'ng-model' => "comment.message"
-            %input{ type: 'hidden', 'ng-model' => "task.id" }
+                            'ng-model' => 'comment.message'
+            %input{ type: 'hidden', 'ng-model' => 'task.id' }
             %span.input-group-btn
-              %button.btn.btn-primary.btn-save{ type: 'submit', 'ng-disabled' => "disabled_submit" }= t 'send'
+              %button.btn.btn-primary.btn-save{ type: 'submit', 'ng-disabled' => 'disabled_submit' }= t 'send'
           .input-group
             = f.file_field :attach,
                             'ng-file-select' => true,
-                            'ng-file-change' => "fileSelected($files, $event)",
-                            'ng-model' => "attach"
+                            'ng-file-change' => 'fileSelected($files, $event)',
+                            'ng-model' => 'attach'

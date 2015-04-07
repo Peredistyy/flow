@@ -6,16 +6,16 @@
                     url: registration_path(user_resource_name),
                     html: { name: 'sign_up_user',
                             novalidate: true,
-                            'ng-controller' => "signUpController",
-                            'ng-submit' => "submit(user)",
-                            'onsubmit' => "return false",
+                            'ng-controller' => 'signUpController',
+                            'ng-submit' => 'submit(user)',
+                            'onsubmit' => 'return false',
                     } do |f|
       .form-group{ 'ng-class' => "{'has-error': sign_up_user['user[email]'].$invalid }" }
         = f.label :email
         = f.text_field :email,
                         class: 'form-control',
                         placeholder: :email,
-                        'ng-model' => "user.email",
+                        'ng-model' => 'user.email',
                         'valid-email' => true
         .help-inline
           .help-block.with-errors{ 'ng-show' => "sign_up_user['user[email]'].$invalid" }
@@ -31,7 +31,7 @@
                             placeholder: :password,
                             min: password_length.first,
                             max: password_length.last,
-                            'ng-model' => "user.password",
+                            'ng-model' => 'user.password',
                             'valid-password' => true
         .help-inline
           .help-block.with-errors{ 'ng-show' => "sign_up_user['user[password]'].$invalid" }
@@ -47,7 +47,7 @@
                             placeholder: :password_confirmation,
                             min: password_length.first,
                             max: password_length.last,
-                            'ng-model' => "user.password_confirmation",
+                            'ng-model' => 'user.password_confirmation',
                             'valid-password-confirmation' => true
         .help-inline
           .help-block.with-errors{ 'ng-show' => "sign_up_user['user[password_confirmation]'].$invalid" }
@@ -58,8 +58,8 @@
                 = t 'sign_up_form.error.attribute.password_confirmation.string_length'
               %li{ 'ng-show' => "sign_up_user['user[password_confirmation]'].$error.not_match" }
                 = t 'sign_up_form.error.attribute.password_confirmation.not_match'
-      = f.submit t('sign_up_button'), class: 'btn btn-primary', 'ng-disabled' => "!formValid() || disabled_submit"
+      = f.submit t('sign_up_button'), class: 'btn btn-primary', 'ng-disabled' => '!formValid() || disabled_submit'
       .help-inline.has-error
-        .help-block.with-errors{ 'ng-show' => "server_errors" }
-          %ul.list-unstyled{ 'ng-repeat' => "server_error in server_errors" }
-            %li= "{{ server_error }}"
+        .help-block.with-errors{ 'ng-show' => 'server_errors' }
+          %ul.list-unstyled{ 'ng-repeat' => 'server_error in server_errors' }
+            %li= '{{ server_error }}'
