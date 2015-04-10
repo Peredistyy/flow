@@ -1,11 +1,10 @@
 class TasksController < ApplicationController
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:resorted]
+  load_and_authorize_resource only: [:create, :update, :destroy]
 
   def create
-    @project = current_user.projects.find project_params[:id]
-    @task = @project.tasks.new task_params
-    @task.user = @project.user
+    @task.project = current_user.projects.find(project_params[:id])
 
     if @task.save
       render json: { success: true, task: @task }
@@ -15,23 +14,12 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find(params[:id])
-
-    if can?(:update, @task) && @task.update(task_params)
-      render json: { success: true }
-    else
-      render json: { success: false }
-    end
+    render json: { success: @task.update(task_params) }
   end
 
   def destroy
-    @task = Task.find(params[:id])
-
-    if can?(:destroy, @task) && @task.destroy
-      render json: { success: true }
-    else
-      render json: { success: false }
-    end
+    @task.destroy
+    render json: { success: @task.destroyed? }
   end
 
   def resorted
@@ -46,16 +34,16 @@ class TasksController < ApplicationController
 
   private
 
-  def resorted_params
-    params.require(:tasks)
-  end
+    def resorted_params
+      params.require(:tasks)
+    end
 
-  def task_params
-    params.require(:task).permit(:title, :done, :deadline)
-  end
+    def task_params
+      params.require(:task).permit(:title, :done, :deadline)
+    end
 
-  def project_params
-    params.require(:project).permit(:id)
-  end
+    def project_params
+      params.require(:project).permit(:id)
+    end
 
 end

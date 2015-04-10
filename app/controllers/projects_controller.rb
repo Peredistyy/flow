@@ -1,14 +1,12 @@
 class ProjectsController < ApplicationController
 
-  before_action :authenticate_user!
+  load_and_authorize_resource only: [:create, :update, :destroy]
 
   def index
-    render json: { success: true, projects: current_user.projects }
+    render json: { success: true, projects: Project.accessible_by(current_ability) }
   end
 
   def create
-    @project = current_user.projects.new project_params
-
     if @project.save
       render json: { success: true, project: @project }
     else
@@ -17,29 +15,18 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @project = Project.find(params[:id])
-
-    if can?(:update, @project) && @project.update(project_params)
-      render json: { success: true }
-    else
-      render json: { success: false }
-    end
+    render json: { success: @project.update(project_params) }
   end
 
   def destroy
-    @project = Project.find(params[:id])
-
-    if can?(:destroy, @project) && @project.destroy
-      render json: { success: true }
-    else
-      render json: { success: false }
-    end
+    @project.destroy
+    render json: { success: @project.destroyed? }
   end
 
   private
 
-  def project_params
-    params.require(:project).permit(:title)
-  end
+    def project_params
+      params.require(:project).permit(:title)
+    end
 
 end
