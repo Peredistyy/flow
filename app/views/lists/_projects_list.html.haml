@@ -8,8 +8,8 @@
   %script{ type: 'text/ng-template', id: 'destroy_confirm' }
     .modal-body= t 'destroy_confirm'
     .modal-footer
-      %button.btn.btn-primary{ 'ng-click' => 'yes()' }= t 'yes'
-      %button.btn.btn-warning{ 'ng-click' => 'no()' }= t 'no'
+      %button.btn.btn-primary#yes{ 'ng-click' => 'yes()' }= t 'yes'
+      %button.btn.btn-warning#no{ 'ng-click' => 'no()' }= t 'no'
 
   .container{ 'ng-repeat' => 'project in projects' }
     .col-md-8.col-md-offset-2
