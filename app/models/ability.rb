@@ -3,11 +3,13 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    unless user.nil?
-      can [:read, :create, :update, :destroy], Project, :user_id => user.id
-      can [:read, :create, :update, :destroy], Task, :user_id => user.id
-      can [:read, :create, :update, :destroy], Comment, :user_id => user.id
-    end
+    user ||= User.new
+
+    alias_action :create, :read, :update, :destroy, :to => :crud
+
+    can :crud, Project, :user_id => user.id
+    can :crud, Task, :user_id => user.id
+    can :crud, Comment, :user_id => user.id
   end
 
 end

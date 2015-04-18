@@ -1,0 +1,59 @@
+require 'rails_helper'
+
+RSpec.describe 'Comment', type: :feature, js: true do
+
+  def add_project
+    within "form[name='add_project']" do
+      click_button I18n.t('add_project_button')
+      fill_in 'project_title', with: 'NewProject'
+      click_button I18n.t('add_project_button')
+    end
+  end
+
+  def add_task
+    within "form[name='add_task']" do
+      fill_in 'task_title', with: 'NewTask'
+      click_button I18n.t('add_task_button')
+    end
+  end
+
+  def add_comment
+    within '.table-tasks' do
+      find('.project-task-open').click
+    end
+
+    within "form[name='add_comment']" do
+      fill_in 'comment_message', with: 'NewComment'
+      click_button I18n.t('send')
+    end
+  end
+
+  scenario 'Create new task' do
+    user = create :user
+    sign_in user
+    add_project
+    add_task
+    add_comment
+
+    expect(page).to have_selector('div.comment div.text', text: 'NewComment')
+  end
+
+  scenario 'Delete task' do
+    user = create :user
+    sign_in user
+    add_project
+    add_task
+    add_comment
+
+    within '.comments' do
+      first('.close').click
+    end
+
+    within '.modal-dialog' do
+      click_button 'yes'
+    end
+
+    expect(page).not_to have_selector('div.comment div.text', text: 'NewComment')
+  end
+
+end

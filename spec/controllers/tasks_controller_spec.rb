@@ -1,23 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe TasksController, :type => :controller do
+  before do
+    moke_current_ability
+  end
+
   describe 'POST #create' do
     it 'responds JSON' do
-      current_user = login_user
-
-      project = create :project, user_id: current_user.id
+      project = create :project, user_id: @current_user.id
       post :create, project: { id: project.id }, task: { title: 'MyTask', done: true, deadline: '1989-03-21' }
 
       expected = { success: true, task: project.tasks.first }
       expect(response.body).to eq(expected.to_json)
     end
+
+    it 'cancan does not allow' do
+      @ability.cannot :create, Task
+      post :create, { task: attributes_for(:task) }
+
+      expect(response.body).to eq(access_denied_expected.to_json)
+    end
   end
 
   describe 'PUT #update' do
     it 'responds JSON' do
-      current_user = login_user
-
-      task = create :task, user_id: current_user.id
+      task = create :task, user_id: @current_user.id
 
       put :update, id: task.id, task: { title: 'NEWTaskTitle' }
 
@@ -27,12 +34,19 @@ RSpec.describe TasksController, :type => :controller do
       expected = { success: true }
       expect(response.body).to eq(expected.to_json)
     end
+
+    it 'cancan does not allow' do
+      task = create :task, user_id: @current_user.id
+      @ability.cannot :update, task
+      post :update, id: task.id, project: { title: 'NEWTaskTitle' }
+
+      expect(response.body).to eq(access_denied_expected.to_json)
+    end
   end
 
   describe 'DELETE #destroy' do
     it 'responds JSON' do
-      current_user = login_user
-      task = create :task, title: 'TaskTitle', user_id: current_user.id
+      task = create :task, title: 'TaskTitle', user_id: @current_user.id
 
       delete :destroy, id: task.id
 
@@ -41,15 +55,21 @@ RSpec.describe TasksController, :type => :controller do
       expected = { success: true }
       expect(response.body).to eq(expected.to_json)
     end
+
+    it 'cancan does not allow' do
+      task = create :task, user_id: @current_user.id
+      @ability.cannot :destroy, task
+      post :destroy, id: task.id
+
+      expect(response.body).to eq(access_denied_expected.to_json)
+    end
   end
 
   describe 'POST #resorted' do
     it 'responds JSON' do
-      current_user = login_user
-
-      task1 = create :task, title: 'Task1', user_id: current_user.id, order: 1
-      task2 = create :task, title: 'Task2', user_id: current_user.id, order: 2
-      task3 = create :task, title: 'Task3', user_id: current_user.id, order: 3
+      task1 = create :task, title: 'Task1', user_id: @current_user.id, order: 1
+      task2 = create :task, title: 'Task2', user_id: @current_user.id, order: 2
+      task3 = create :task, title: 'Task3', user_id: @current_user.id, order: 3
 
       post :resorted, tasks: [ { id: task1.id, order: 3 }, { id: task2.id, order: 2 }, { id: task3.id, order: 1 } ]
 
